@@ -5,14 +5,14 @@ import { Link } from 'react-router-dom';
 import moment from "moment";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import './dashbord.css'  
-const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
-    const [consomableData, setconsomableData] = useState([]);
+  import './dashbord.css'
+const Options = () => {
+    const [OptionData, setOptionData] = useState([]);
     const [showUpdateForm, setShowUpdateForm] = useState(false);
     const [showForm ,setShowForm] =useState(false)
     const [referenceFilter, setReferenceFilter] = useState('');
     const [designationFilter, setDesignationFilter] = useState('');
-    const [newconsomable, setNewconsomable] = useState({
+    const [newOption, setNewOption] = useState({
         reference: '',
         designation: '',
         price: '',
@@ -25,27 +25,27 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
     });
     const [isColorChecked, setIsColorChecked] = useState(false);
     const [isMonochromeChecked, setIsMonochromeChecked] = useState(false);
-    const [editedconsomable, setEditedconsomable] = useState({
+    const [editedOption, setEditedOption] = useState({
         reference: '',
         designation: '',
         affect: '',
         price: '',
-        option: '', 
+        Option: '', 
         cout: '',   
     });
-      const [consomableList, setconsomableList] = useState([]);
+      const [OptionList, setOptionList] = useState([]);
     const navigate = useNavigate();
 
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('consomableData')) || [];
-        setconsomableData(storedData);
+        const storedData = JSON.parse(localStorage.getItem('OptionData')) || [];
+        setOptionData(storedData);
     }, []);
 
     useEffect(() => {
-        if (consomableData.length > 0) {
-            localStorage.setItem('consomableData', JSON.stringify(consomableData));
+        if (OptionData.length > 0) {
+            localStorage.setItem('OptionData', JSON.stringify(OptionData));
         }
-    }, [consomableData]);
+    }, [OptionData]);
 
     const handleColorChange = () => {
         setIsColorChecked(!isColorChecked);
@@ -58,13 +58,13 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setNewconsomable({ ...newconsomable, [name]: value });
+        setNewOption({ ...newOption, [name]: value });
     };
-
+    
     const handleSubmitOne = (event) => {
         event.preventDefault();
-        setconsomableData((prev) => [...prev, newconsomable]);
-        setNewconsomable({
+        setOptionData((prev) => [...prev, newOption]);
+        setNewOption({
             reference: '',
             designation: '',
             price: '',
@@ -80,9 +80,9 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
     };
 
     const handleDelete = (index) => {
-        const updatedList = consomableData.filter((_, i) => i !== index);
-        setconsomableData(updatedList);
-        localStorage.setItem('consomableData', JSON.stringify(updatedList));
+        const updatedList = OptionData.filter((_, i) => i !== index);
+        setOptionData(updatedList);
+        localStorage.setItem('OptionData', JSON.stringify(updatedList));
     };
 
     const handleUpdateClick = () => {
@@ -93,25 +93,8 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
     const handleGoBack = () => {
         navigate(-1)
     };
-    {/*
-    const handleAddList =()=>{
-        const updatedList = [...equipmentList, editedEquipment];
-        setEquipmentList(updatedList);
     
-        // Sauvegarde dans localStorage
-        localStorage.setItem("equipmentList", JSON.stringify(updatedList));
-    
-        // Réinitialise les champs du formulaire
-        setEditedEquipment({  reference: '',
-            designation: '',
-            affect: '',
-            price: 0,
-            option: '', // Ajouté pour gérer l'option (radio buttons)
-            cout: '',   });
-       }
-            */}
-
-       const handleReferenceFilterChange = (e) => {
+    const handleReferenceFilterChange = (e) => {
         setReferenceFilter(e.target.value);
     };
 
@@ -135,30 +118,32 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
     });
   }, []);
     return (
-        <div className="mt-14 shadow-xl p-8 font-medium bg-gray-100 m-20 rounded-xl" >
-             <div className="flex justify-between items-center mb-10  ">
+        <div className="mt-14 shadow-xl p-8 font-medium bg-gray-100 m-20 rounded-xl">
+             <div className="flex justify-between items-center mb-10 p-4 ">
             
-             <Link to='/Consommables' className=' text-xl  font-bold text-blue-950'>
-        Consommables
+             <Link to='/Consommables' className=' text-2xl  font-bold text-blue-950'>
+       Options
     </Link>
              
     
  <button
    onClick={handleGoBack}
-     className="p-2 w-32 rounded-xl link bg-amber-900 text-white "
+     className="p-2 w-32 link rounded-xl bg-amber-900 text-white "
  >
      Retour
  </button>
 </div>
 {showForm && (
   <>
-    
     {showUpdateForm && (
-      <>
       <div className="text-end mr-10">
        
       </div>
-        <h1 className="mt-10 text-xl font-bold text-blue-950">Nouveau Consommable</h1>
+    )}
+
+    {showUpdateForm && (
+      <>
+        <h1 className="mt-10 text-xl text-blue-950 font-bold">Nouvelle Option</h1>
       </>
     )}
   </>
@@ -170,34 +155,34 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
 <div className="flex mb-4">
                         <input
                             type="text"
-                            placeholder=" Référence"
+                            placeholder="Référence"
                             value={referenceFilter}
                             onChange={handleReferenceFilterChange}
-                            className="p-2 rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4"
+                            className="p-2 border rounded-xl border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4"
                         />
                         <input
                             type="text"
-                            placeholder=" Désignation"
+                            placeholder="Désignation"
                             value={designationFilter}
                             onChange={handleDesignationFilterChange}
-                            className="p-2 rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4 ml-2"
+                            className="p-2 border border-gray-900 rounded-xl text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4 ml-2"
                         />
-                         <button onClick={{}} className="link ml-2 p-2 rounded-xl w-32 text-white bg-slate-800 ">
+                         <button onClick={{}} className="link ml-2 p-2 w-32 rounded-xl text-white bg-slate-800  ">
                           Rechercher
                         </button>
-                        <button onClick={handleCancelFilter} className="link rounded-xl w-32 ml-2 p-2 text-white bg-amber-900">
+                        <button onClick={handleCancelFilter} className="link ml-2  w-32 p-2 rounded-xl text-white bg-amber-900 ">
                             Annuler
                         </button>
                        
-                        <button onClick={handleConsommable} className="link ml-auto rounded-xl w-52 p-2 text-white bg-slate-800">
-                            Nouveau Consommable
+                        <button onClick={handleConsommable} className="link ml-auto w-52 p-2 rounded-xl text-white bg-slate-800 ">
+                            Nouvelle Option
                         </button>
                     </div>
-<h1 className='text-xl text-blue-950 font-bold mt-10'>Liste des Consommables</h1>
+<h1 className='text-xl text-blue-950 font-bold mt-10 ml-4'>Liste des Options</h1>
 
 
 
-<table data-aos="fade-up"  className="min-w-full p-2 mt-8">
+<table data-aos="fade-up"    className="min-w-full p-2 mt-8 shadow-lg">
                     <thead>
   <tr>
     <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Référence</th>
@@ -210,7 +195,7 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
   </tr>
 </thead>
 <tbody>
-  {consomableData.map((equipment, index) => (
+  {OptionData.map((equipment, index) => (
     <tr key={index} >
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.reference}</td>
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.designation}</td>
@@ -218,7 +203,12 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
       <td className="px-4 py-2 text-gray-500  border border-gray-300  bg-white">{equipment.price}</td>
       
        
-        <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white"><button onClick={() => handleDelete(index)} className='bg-slate-800  text-amber-100 p-2 rounded link '><FaTimes/></button></td>
+        <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">
+        <div className="flex justify-center items-center">
+            <button onClick={() => handleDelete(index)} className='bg-slate-800 rounded text-amber-100 p-2 link '><FaTimes/>
+            </button>
+            </div>
+            </td>
         </tr>
   ))}
 </tbody>
@@ -235,25 +225,25 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                            type="text"
                            name="reference"
                            placeholder="Référence"
-                           value={newconsomable.reference}
+                           value={newOption.reference}
                            onChange={handleInputChange}
-                           className="p-2 rounded-xl mt-2 border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
                            required
                        />
                        <input
                            type="text"
                            name="designation"
                            placeholder="Désignation"
-                           value={newconsomable.designation}
+                           value={newOption.designation}
                            onChange={handleInputChange}
-                           className="p-2 rounded-xl mt-2 border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
                            required
                        />
                        <input
                            type="number"
                            name="price"
                            placeholder="Prix public"
-                           value={newconsomable.price}
+                           value={newOption.price}
                            onChange={handleInputChange}
                            className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
                            required
@@ -262,37 +252,19 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                            type="text"
                            name="affect"
                            placeholder="Affectation"
-                           value={newconsomable.affect}
+                           value={newOption.affect}
                            onChange={handleInputChange}
                            className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
                            required
                        />
-                         <label className="flex items-center m-2">
-                           <input
-                               type="checkbox"
-                               checked={isColorChecked}
-                               onChange={handleColorChange}
-                               className="mr-2 h-5 w-5 text-gray-600 rounded border-gray-300"
-                           />
-                           Couleur
-                       </label>
-
-                       <label className="flex items-center m-2" >
-                           <input
-                               type="checkbox"
-                               checked={isMonochromeChecked}
-                               onChange={handleMonochromeChange}
-                               className="mr-2 h-5 w-5 text-gray-600 rounded border-gray-300"
-                           />
-                           Monochrome
-                       </label>
+                       
                    </div>
                    {!showUpdateForm && (
                    <div className="flex mt-10 justify-end">
-                       <button type="submit" className="p-2 link rounded-xl w-44 text-white bg-slate-800">
+                       <button type="submit"  className="p-2 link rounded-xl w-44 text-white bg-slate-800 ">
                            Enregistrer
                        </button>
-                       <button type="button" onClick={() => setShowForm(false)}  className=" rounded-xl ml-2 p-2 w-44 link text-white bg-amber-900 ">
+                       <button type="button" onClick={() => setShowForm(false)} className="ml-2 p-2  rounded-xl link w-44 text-white bg-amber-900 ">
                            Annuler
                        </button>
                 </div>)}
@@ -312,7 +284,7 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                                 type="radio"
                                 name="option"
                                 value="importation"
-                                checked={newconsomable.option=== "importation"}
+                                checked={newOption.option === "importation"}
                                 onChange={handleInputChange}
                                 className="mr-2 accent-gray-600"
                             />
@@ -323,7 +295,7 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                                 type="radio"
                                 name="option"
                                 value="achat_local"
-                                checked={newconsomable.option === "achat_local"}
+                                checked={newOption.option === "achat_local"}
                                 onChange={handleInputChange}
                                 className="mr-2 accent-gray-600"
                             />
@@ -337,18 +309,18 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                   type="number"
                  name="prix"
                   placeholder="Prix d'achat"
-                  value={newconsomable.prix}
+                  value={newOption.prix}
                   onChange={handleInputChange}
-                 className="p-2 rounded-xl mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
+                 className="p-2 mt-2  rounded-xl  border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
                  required
 />
                   <input
                   type="text"
                  name="taux"
                   placeholder="Taux Change"
-                  value={newconsomable.taux}
+                  value={newOption.taux}
                   onChange={handleInputChange}
-                 className="p-2 rounded-xl mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
+                 className="p-2 mt-2  rounded-xl  border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
                  required
 />
         
@@ -356,18 +328,18 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                   type="number"
                  name="cout"
                   placeholder="Cout d'achat"
-                  value={newconsomable.cout}
+                  value={newOption.cout}
                   onChange={handleInputChange}
-                 className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
+                 className="p-2 mt-2  rounded-xl  border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
                  required
 />
 <input
                   type="number"
                  name="frais"
                   placeholder="Frais d'approche"
-                  value={newconsomable.frais}
+                  value={newOption.frais}
                   onChange={handleInputChange}
-                 className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
+                 className="p-2 mt-2  rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
                  required
 />
 
@@ -375,14 +347,14 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                   type="number"
                  name="duree"
                   placeholder="Durée de vie"
-                  value={newconsomable.duree}
+                  value={newOption.duree}
                   onChange={handleInputChange}
-                 className="p-2 mt-2 rounded-xl border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
+                 className="p-2 mt-2  rounded-xl  border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
                  required
 />
 
- 
-                  <div className="flex-1 p-3 rounded-xl m-2 bg-white  border border-black shadow text-left">
+
+                  <div className="flex-1 p-3 m-2  rounded-xl  bg-white  border border-black shadow text-left">
                       <h5 className="text-sm">Cout/page</h5>
                   </div>
                  
@@ -397,10 +369,10 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
                         </button>
                  </div>*/}
                       <div className="flex mt-10 justify-end">
-                      <button type="submit" onClick={() => setShowUpdateForm(false)} className="link p-2 rounded-xl w-44 text-white bg-slate-800">
+                      <button type="submit"   className="p-2 link  rounded-xl w-44 text-white bg-slate-800 ">
                            Enregistrer
                        </button>
-                       <button type="button" onClick={() => setShowUpdateForm(false)}  className="link  rounded-xl ml-2 p-2  w-44 text-white bg-amber-900">
+                       <button type="button" onClick={() => setShowUpdateForm(false)}  className="ml-2 p-2   rounded-xl w-44 link text-white bg-amber-900 ">
                            Annuler
                        </button>
                        </div>
@@ -416,11 +388,11 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
    {/* <Link to='/Consommables' className=' text-2xl hover:text-gray-700'>
         Consommables
     </Link>*/}
-     <h2 className="text-xl font-bold text-blue-950 m-4"> Mise à jour des prix</h2>
+     <h2 className="text-xl font-bold   text-blue-950 m-4"> Mise à jour des prix</h2>
 
     <button
          onClick={handleUpdateClick}
-        className="p-2 w-52 link rounded-xl mb-2 bg-slate-800 text-white "
+        className="p-2 w-52  link rounded-xl mb-2 bg-slate-800 text-white "
     >
        Mettre à jour les prix
     </button>
@@ -438,7 +410,7 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
            {showForm && (
                         <>
            {!showUpdateForm && (
-                    <table data-aos="fade-up" className="min-w-full p-2 mb-4">
+                    <table data-aos="fade-up"   className="min-w-full p-2 mb-4 shadow-lg">
                     <thead>
   <tr>
     <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Référence</th>
@@ -457,11 +429,11 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
   </tr>
 </thead>
 <tbody>
-  {consomableData.map((equipment, index) => (
+  {OptionData.map((equipment, index) => (
     <tr key={index} >
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.reference}</td>
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.designation}</td>
-      <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.option}</td>
+      <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.Option}</td>
       <td className="px-4 py-2 text-gray-500  border border-gray-300  bg-white">{equipment.prix}</td>
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.taux}</td>
       <td className="px-4 py-2 text-gray-500 border border-gray-300  bg-white">{equipment.prix}</td>
@@ -487,4 +459,4 @@ const Consommables = ({ selectedSubcategoryIndex, subcategory, product }) => {
     );
 };
 
-export default Consommables;
+export default Options;

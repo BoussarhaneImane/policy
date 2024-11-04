@@ -1,0 +1,26 @@
+.links {
+  background-color: rgb(235, 237, 248);
+  border-radius: 0.9rem;
+  padding: 0.8rem;
+  color: rgb(249, 249, 236);
+  width: 100px;
+  height: 68px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.links:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(56, 55, 55, 0.631);
+  background-color: rgb(249, 249, 236);
+}
+.group{
+  position: relative;
+  z-index: 10; /* Z-index plus haut pour que le menu soit devant la table */
+}
+
+.group:hover .group ul {
+  opacity: 1;
+  visibility: visible;
+}
+

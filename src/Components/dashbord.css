@@ -1,0 +1,7 @@
+.link{
+  box-shadow: 0 4px 8px rgba(78, 76, 76, 0.431); /* Light shadow with some blur */
+}
+.link:hover{
+  transform: scale(1.1); /* Agrandit le bouton de 10% au survol */
+  box-shadow: 0 8px 16px rgba(223, 223, 223, 0.631); /* Ombre plus intense au survol */
+}

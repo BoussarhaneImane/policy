@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { FaTimes, FaEdit } from 'react-icons/fa';
 import EquipmentComponent from './EquipmentComponent';
 import { Link } from 'react-router-dom';
-
+import AOS from "aos";
+import "aos/dist/aos.css";
+import './dashbord.css'
 const DashboardPage = () => {
     const [filter, setFilter] = useState('');
     const [newProduct, setNewProduct] = useState('');
@@ -145,37 +147,48 @@ const DashboardPage = () => {
         setSelectedSubcategoryIndex(index); // Set selected subcategory index
     };
 
-   
-
+  
+    useEffect(() => {
+        AOS.init({
+          duration: 1000, // Durée de l'animation en millisecondes (par exemple, 1000ms = 1s)
+          easing: 'ease-in-out', // Type de transition d'animation
+          once: true, // Si true, l'animation ne se déclenche qu'une seule fois
+        });
+      }, []); 
     return (
-        <div className="p-6 bg-white min-h-screen font-medium">
+        <div className="min-h-screen mt-14 shadow-xl p-8 font-medium bg-gray-100 m-20 rounded-xl">
             {/* Search and add product forms */}
             {selectedProductIndex === null ? (
-                <div>
+                <div >
+                    <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-bold text-blue-950 " > Equipements</h2>
                     <div className="flex justify-end mb-8 mt-8">
                         <button 
                             onClick={() => window.location.href = '/'} 
-                            className="p-2 w-32 bg-amber-900  text-white rounded-lg" 
+                            className="p-2 w-32 bg-amber-900 rounded-xl text-white link " 
                            
                         >
                             Retour 
                         </button>
+                        </div>
                     </div>
                     <div>
                         <div className="flex mb-4">
+                       
                             <div className="flex-1 mr-2">
+                          
                                 <div className="flex">
                                     <input
                                         type="text"
                                         placeholder="Filtrer les produits"
                                         value={filter}
                                         onChange={handleFilterChange}
-                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow rounded-lg w-full"
+                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow rounded-xl w-full"
                                     />
-                                    <button onClick={() => {}} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                                    <button onClick={() => {}} className="link ml-2 p-2 w-44  text-white rounded-xl  bg-amber-900 ">
                                         ReChercher
                                     </button>
-                                    <button onClick={() => setFilter('')} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                                    <button onClick={() => setFilter('')} className="link ml-2 p-2  w-44  rounded-xl  text-white bg-slate-800 ">
                                         Annuler
                                     </button>
                                 </div>
@@ -187,15 +200,15 @@ const DashboardPage = () => {
                                         placeholder="Ajouter ou modifier un produit"
                                         value={newProduct}
                                         onChange={handleProductChange}
-                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow rounded-lg w-full"
+                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
                                     />
                                     <button 
                                         onClick={handleAddOrUpdateProduct} 
-                                        className={`ml-2 p-2 text-white bg-teal-600 rounded-lg ${editingProductIndex !== null ? 'w-40' : ''}`}
+                                        className={` link ml-2 p-2 w-44 rounded-xl  text-white bg-amber-900 ${editingProductIndex !== null ? 'w-40' : ''}`}
                                     >
                                         {editingProductIndex !== null ? 'Mettre à jour' : 'Enregistrer'}
                                     </button>
-                                    <button onClick={handleCancelProduct} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                                    <button onClick={handleCancelProduct} className=" link ml-2 w-44 p-2 text-white bg-slate-800 rounded-xl  ">
                                         Annuler
                                     </button>
                                 </div>
@@ -203,7 +216,7 @@ const DashboardPage = () => {
                         </div>
 
                         {/* Products table */}
-                        <table className="min-w-full bg-slate-800 border border-gray-300 mt-14">
+                        <table  data-aos="fade-up" className="min-w-full bg-slate-800 border border-gray-300 mt-14   shadow-lg">
                             <thead>
                                 <tr>
                                     <th className="border border-gray-300 p-2 text-gray-300 text-left">Produit</th>
@@ -215,7 +228,7 @@ const DashboardPage = () => {
                                     .filter(product => product.name.toLowerCase().includes(filter.toLowerCase()))
                                     .map((product, index) => (
                                         <tr key={index}>
-                                            <td className="border border-gray-300 bg-white p-2 text-gray-700 hover:bg-gray-50">
+                                            <td className="border border-gray-300 bg-white p-2 text-gray-700 ">
                                                 <button 
                                                     onClick={() => handleSelectProduct(index)} 
                                                     className="text-left w-full text-gray-500 "
@@ -226,13 +239,14 @@ const DashboardPage = () => {
                                             <td className="border border-gray-300 p-2 bg-white flex">
                                                 <button 
                                                     onClick={() => handleEditProduct(index)} 
-                                                    className="flex items-center bg-green-500 text-white p-2 rounded mr-2"
+                                                    className="link flex items-center rounded bg-amber-100 text-blue-950 p-2  mr-2"
+                                                    style={{backgroundColor:''}}
                                                 >
                                                     <FaEdit />
                                                 </button>
                                                 <button 
                                                     onClick={() => handleDeleteProduct(index)} 
-                                                    className="bg-red-500 text-white p-2 rounded"
+                                                    className="link bg-slate-800 rounded  text-amber-100 p-2 "
                                                 >
                                                     <FaTimes />
                                                 </button>
@@ -249,46 +263,47 @@ const DashboardPage = () => {
                 {/* Sous-catégories */}
                 <div className="mt-8">
                     <div className="flex justify-between items-center mb-4">
-                        <h2 className="text-lg font-medium">Sous-catégories de {products[selectedProductIndex].name}</h2>
-                        <button onClick={handleBackToProducts} className="p-2 w-32  text-white bg-amber-900 rounded-lg">
+                        {/*<h2 className="text-lg font-medium">Sous-catégories de {products[selectedProductIndex].name}</h2>*/}
+                        <h2 className="text-xl font-bold text-blue-950"> Equipements</h2>
+                        <button onClick={handleBackToProducts} className="p-2 w-32 rounded-xl   text-white bg-amber-900 link ">
                             Retour 
                         </button>
                     </div>
                     
                     <div className="flex mb-4">
                         {/* Filtrage des sous-catégories */}
-                        <div className="flex-1 mr-2 flex items-center">
+                        <div className="flex-1 mr-2 mt-6 flex items-center">
                             <input
                                 type="text"
                                 placeholder="Filtrer les sous-catégories"
                                 value={subcategoryFilter}
                                 onChange={handleSubcategoryFilterChange}
-                                className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow rounded-lg w-full"
+                                className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
                             />
-                            <button onClick={() => {}} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                            <button onClick={() => {}} className="ml-2 p-2 link  w-44 text-white bg-amber-900 rounded-xl ">
                                 ReChercher
                             </button>
-                            <button onClick={() => setSubcategoryFilter('')} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                            <button onClick={() => setSubcategoryFilter('')} className="ml-2 p-2 link  w-44 text-white bg-slate-800 rounded-xl  ">
                                 Annuler
                             </button>
                         </div>
             
                         {/* Ajout de sous-catégories */}
-                        <div className="flex-1 ml-2 flex items-center">
+                        <div className="flex-1 ml-2 mt-6 flex items-center">
                             <input
                                 type="text"
                                 placeholder="Ajouter une sous-catégorie"
                                 value={newSubcategory}
                                 onChange={handleSubcategoryChange}
-                                className="p-2 border border-gray-300 rounded w-full"
+                                className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
                             />
                             <button 
                                 onClick={handleAddSubcategory} 
-                                className={`ml-2 p-2 text-white bg-teal-600 rounded-lg ${editingSubcategoryIndex !== null ? 'w-40' : ''}`}
+                                className={`ml-2 p-2 link  w-44 rounded-xl  text-white bg-amber-900  ${editingSubcategoryIndex !== null ? 'w-40' : ''}`}
                             >
                                 {editingSubcategoryIndex !== null ? 'Mettre à jour' : 'Ajouter'}
                             </button>
-                            <button onClick={handleCancelSubcategory} className="ml-2 p-2 text-white bg-teal-600 rounded-lg">
+                            <button onClick={handleCancelSubcategory} className="link rounded-xl ml-2 p-2  w-44 text-white bg-slate-800 ">
                                 Annuler
                             </button>
                         </div>
@@ -297,7 +312,7 @@ const DashboardPage = () => {
             
 
                     {/* Subcategories table */}
-                    <table className="min-w-full bg-slate-800 border border-gray-300 mt-14">
+                    <table  data-aos="fade-up" className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
                         <thead>
                             <tr>
                                 <th className="border border-gray-300 p-2 text-gray-300 text-left">Sous-catégorie</th>
@@ -309,7 +324,7 @@ const DashboardPage = () => {
                                 .filter(subcategory => subcategory.toLowerCase().includes(subcategoryFilter.toLowerCase()))
                                 .map((subcategory, index) => (
                                     <tr key={index}>
-                                        <td className="text-gray-500  border  border-gray-300 bg-white p-2  hover:bg-gray-50">
+                                        <td className="text-gray-500  border  border-gray-300 bg-white p-2   ">
                                             <button onClick={() => handleSelectSubcategory(index)} className="text-left w-full">
                                                 {subcategory}
                                             </button>
@@ -317,13 +332,13 @@ const DashboardPage = () => {
                                         <td className="border border-gray-300 p-2 bg-white flex">
                                             <button 
                                                 onClick={() => handleEditSubcategory(index)} 
-                                                className="flex items-center bg-green-500 text-white p-2 rounded mr-2"
+                                                className="link flex items-center rounded bg-amber-100 text-slate-800 p-2  mr-2"
                                             >
                                                 <FaEdit />
                                             </button>
                                             <button 
                                                 onClick={() => handleDeleteSubcategory(index)} 
-                                                className="bg-red-500 text-white p-2 rounded"
+                                                className="link bg-slate-800 rounded  text-amber-100 p-2 "
                                             >
                                                 <FaTimes />
                                             </button>
@@ -338,13 +353,14 @@ const DashboardPage = () => {
             ) : (
                 /* Render EquipmentComponent when subcategory is selected */
                 <div >
+                  
                  <div className="flex justify-between items-center mt-8">
-    <Link to='/Consommables' className=' text-2xl hover:text-gray-700'>
-        Consommables
-    </Link>
+  
+     <h2 className="text-xl font-bold text-blue-950"> Equipements</h2>
+
     <button
         onClick={() => setSelectedSubcategoryIndex(null)}
-        className="p-2 w-32 bg-amber-900 text-white rounded-lg"
+        className="p-2 w-32 rounded-xl link bg-amber-900 text-white "
     >
         Retour
     </button>

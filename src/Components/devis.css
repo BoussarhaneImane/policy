@@ -1,0 +1,4 @@
+.devis-container {
+  position: relative;
+  z-index: 2; /* Z-index bas pour que la table reste en arrière */
+}
