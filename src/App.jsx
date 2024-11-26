@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginPage from './Components/LoginPage';
 import DashboardPage from './Components/DashboardPage';
@@ -17,9 +18,21 @@ import Footer from './Components/Footer';
 import Devis from './Components/Devis';
 import NotFoundPage from './Components/NotFoundPage';
 import Attente from './Components/Attente';
-
+import ClientList from './Components/ClientList';
+import ClientImport from './Components/ClientImport';
+import Directions from './Components/Directions';
+import Departements from './Components/Departements';
+import Functions from './Components/Functions';
+import Employes from './Components/Employes';
+import Fonctions from './Components/Functions';
+import EquipmentComponent from './Components/EquipmentComponent';
 const App = () => {
 
+     const [directions, setDirections] = useState([]);
+
+    const handleDirectionsChange = (updatedDirections) => {
+      setDirections(updatedDirections);
+    };
     return (
         <Router>
             <Routes>
@@ -35,6 +48,7 @@ const App = () => {
                         </>
                     } 
                 />
+                   
                  <Route 
                     path="/Produits/ImporterCategories" 
                     element={
@@ -111,6 +125,72 @@ const App = () => {
                             <Navbar/>
                             <Attente/>
                         
+                        </>
+                    } 
+                />
+                 <Route 
+                    path="/clients/Liste"
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <ClientList/>
+                        
+                        </>
+                    } 
+                />
+                 <Route 
+                    path="/clients/Importer"
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <ClientImport/>
+                        
+                        </>
+                    } 
+                />
+<Route 
+                    path="/Effectifs/direction" 
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <Directions onDirectionsChange={handleDirectionsChange} />
+                           
+                        </>
+                    } 
+                />
+                <Route 
+                    path="/Effectifs/department" 
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <Departements  directions={directions} />
+                           
+                        </>
+                    } 
+                />
+                  <Route 
+                    path="/Effectifs/fonctions" 
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <Fonctions directions={directions}/>
+                           
+                        </>
+                    } 
+                />
+<Route 
+                    path="/Effectifs/employes" 
+                    element={
+                        <>
+                            <FirstNav /> 
+                            <Navbar/>
+                            <Employes/>
+                           
                         </>
                     } 
                 />

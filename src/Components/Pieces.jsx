@@ -124,6 +124,9 @@ const  Pieces = () => {
    const handleConsommable = () =>{
         setShowForm(true);
    }
+   const handleBack = () => {
+    setShowForm(false)
+      };
    useEffect(() => {
     AOS.init({
       duration: 1000, // Durée de l'animation en millisecondes (par exemple, 1000ms = 1s)
@@ -132,7 +135,7 @@ const  Pieces = () => {
     });
   }, []); 
     return (
-        <div className="mt-14 shadow-xl p-8 rounded-xl font-medium bg-gray-100 m-20">
+        <div className="mt-14 shadow-xl  m-10  sm:p-8 sm:pt-4  rounded-lg font-medium bg-gray-100 ">
              <div className="flex justify-between items-center mb-10 p-4 ">
             
              <Link to='/Consommables' className=' text-2xl  font-bold text-blue-950'>
@@ -141,8 +144,8 @@ const  Pieces = () => {
              
     
  <button
-   onClick={handleGoBack}
-     className="p-2 w-32  rounded-xl link bg-amber-900 text-white "
+   onClick={handleBack}
+     className="p-2 m-4  sm:w-32  rounded-lg link text-white bg-yellow-800 "
  >
      Retour
  </button>
@@ -168,37 +171,37 @@ const  Pieces = () => {
 
 {!showForm &&(
     <>
-<div className="flex mb-4">
+<div className="flex flex-wrap md:flex-nowrap mb-4 bg-white p-6 rounded-lg shadow-md text-gray-700 items-center gap-4">
                         <input
                             type="text"
                             placeholder="Référence"
                             value={referenceFilter}
                             onChange={handleReferenceFilterChange}
-                            className="p-2 border  rounded-xl  border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                         />
                         <input
                             type="text"
                             placeholder="Désignation"
                             value={designationFilter}
                             onChange={handleDesignationFilterChange}
-                            className="p-2 border rounded-xl border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4 ml-2"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                         />
-                         <button onClick={{}} className="link ml-2 p-2 rounded-xl w-32 text-white bg-slate-800 ">
+                         <button onClick={{}} className="link ml-2 p-2 rounded-lg w-32 text-white bg-slate-800 ">
                           Rechercher
                         </button>
-                        <button onClick={handleCancelFilter} className=" link ml-2 p-2 rounded-xl w-32 text-white bg-amber-900 ">
+                        <button onClick={handleCancelFilter} className=" link ml-2 p-2 rounded-lg w-32 text-slate-800 bg-amber-100 ">
                             Annuler
                         </button>
                        
-                        <button onClick={handleConsommable} className="link ml-auto rounded-xl  w-52 p-2 text-white bg-slate-800 ">
+                        <button onClick={handleConsommable} className="link ml-auto rounded-lg  w-52 p-2 text-white bg-slate-800 ">
                             Nouvelle Pièce détachée
                         </button>
                     </div>
 <h1 className='text-xl text-blue-950 font-bold mt-10 ml-4'>Liste  Pièces détachées</h1>
 
 
-
-<table data-aos="fade-up"   className="min-w-full p-2 mt-8 shadow-lg">
+<div className="p-4 md:p-6 overflow-x-auto">
+<table className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
                     <thead>
   <tr>
     <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Référence</th>
@@ -229,20 +232,21 @@ const  Pieces = () => {
 </tbody>
 
                    </table>
+                   </div>
 
 </>
 )}
 {showForm && (
 <form onSubmit={handleSubmitOne} className="mb-4 p-4">
                    
-                   <div className="flex  mb-4 ">
+                   <div className="flex flex-wrap md:flex-nowrap mb-4 bg-white p-6 rounded-lg shadow-md text-gray-700 items-center gap-4">
                        <input
                            type="text"
                            name="reference"
                            placeholder="Référence"
                            value={newpiece.reference}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 rounded-xl  border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -251,7 +255,7 @@ const  Pieces = () => {
                            placeholder="Désignation"
                            value={newpiece.designation}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 rounded-xl  border border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -260,7 +264,7 @@ const  Pieces = () => {
                            placeholder="Prix public"
                            value={newpiece.price}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border rounded-xl  border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -269,17 +273,17 @@ const  Pieces = () => {
                            placeholder="Affectation"
                            value={newpiece.affect}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border rounded-xl  border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                           className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        
                    </div>
                    {!showUpdateForm && (
                    <div className="flex mt-10 justify-end">
-                       <button type="submit" className="p-2 rounded-xl link w-44 text-white bg-slate-800 ">
+                       <button type="submit" className="p-2 rounded-lg link w-44 text-white bg-slate-800 ">
                            Enregistrer
                        </button>
-                       <button type="button" onClick={() => setShowForm(false)}  className="rounded-xl w-44 ml-2 p-2 link text-white bg-amber-900 ">
+                       <button type="button" onClick={() => setShowForm(false)}  className="rounded-lg w-44 ml-2 p-2 link text-slate-800 bg-amber-100 ">
                            Annuler
                        </button>
                 </div>)}
@@ -287,115 +291,112 @@ const  Pieces = () => {
 )}      
 {showForm && (
   <>
-{showUpdateForm && (
-    <>
-    <h1 className='mt-4 text-xl font-bold text-blue-950'>Calcul des prix</h1>
-                        <form onSubmit={handleSubmitOne} className='p-4' >
-              <h3 className="font-bold  text-xl mb-4 mt-8"></h3>
-                    
-                    <div className="flex items-center mb-4">
-                        <label className="flex items-center mr-4">
-                            <input
-                                type="radio"
-                                name="option"
-                                value="importation"
-                                checked={newpiece.option === "importation"}
-                                onChange={handleInputChange}
-                                className="mr-2 accent-gray-600"
-                            />
-                            Importation
-                        </label>
-                        <label className="flex items-center">
-                            <input
-                                type="radio"
-                                name="option"
-                                value="achat_local"
-                                checked={newpiece.option === "achat_local"}
-                                onChange={handleInputChange}
-                                className="mr-2 accent-gray-600"
-                            />
-                            Achat Local
-                        </label>
-                    </div>
+  {showUpdateForm && (
+  <>
+    <h1 className="mt-4 text-xl font-bold text-blue-950">Calcul des prix</h1>
+    <form
+      onSubmit={handleSubmitOne}
+      className="flex flex-col gap-6 bg-white p-6 rounded-lg shadow-md text-gray-700 mt-6"
+    >
+      {/* Radio Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4">
+        <label className="flex items-center">
+          <input
+            type="radio"
+            name="option"
+            value="importation"
+            checked={newpiece.option === "importation"}
+            onChange={handleInputChange}
+            className="mr-2 accent-gray-600"
+          />
+          Importation
+        </label>
+        <label className="flex items-center">
+          <input
+            type="radio"
+            name="option"
+            value="achat_local"
+            checked={newpiece.option === "achat_local"}
+            onChange={handleInputChange}
+            className="mr-2 accent-gray-600"
+          />
+          Achat Local
+        </label>
+      </div>
 
-                    <div className="flex mb-4">
-                 
-                    <input
-                  type="number"
-                 name="prix"
-                  placeholder="Prix d'achat"
-                  value={newpiece.prix}
-                  onChange={handleInputChange}
-                 className="p-2 rounded-xl  mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
-                 required
-/>
-                  <input
-                  type="text"
-                 name="taux"
-                  placeholder="Taux Change"
-                  value={newpiece.taux}
-                  onChange={handleInputChange}
-                 className="p-2 rounded-xl  mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
-                 required
-/>
-        
-                  <input
-                  type="number"
-                 name="cout"
-                  placeholder="Cout d'achat"
-                  value={newpiece.cout}
-                  onChange={handleInputChange}
-                 className="p-2 rounded-xl  mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
-                 required
-/>
-<input
-                  type="number"
-                 name="frais"
-                  placeholder="Frais d'approche"
-                  value={newpiece.frais}
-                  onChange={handleInputChange}
-                 className="p-2 rounded-xl  mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
-                 required
-/>
+      {/* Input Fields */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <input
+          type="number"
+          name="prix"
+          placeholder="Prix d'achat"
+          value={newpiece.prix}
+          onChange={handleInputChange}
+          className="p-2 w-full rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
+          required
+        />
+        <input
+          type="text"
+          name="taux"
+          placeholder="Taux Change"
+          value={newpiece.taux}
+          onChange={handleInputChange}
+          className="p-2 w-full rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
+          required
+        />
+        <input
+          type="number"
+          name="cout"
+          placeholder="Cout d'achat"
+          value={newpiece.cout}
+          onChange={handleInputChange}
+          className="p-2 w-full rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
+          required
+        />
+        <input
+          type="number"
+          name="frais"
+          placeholder="Frais d'approche"
+          value={newpiece.frais}
+          onChange={handleInputChange}
+          className="p-2 w-full rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
+          required
+        />
+        <input
+          type="number"
+          name="duree"
+          placeholder="Durée de vie"
+          value={newpiece.duree}
+          onChange={handleInputChange}
+          className="p-2 w-full rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
+          required
+        />
+        <div className="flex items-center justify-center w-full h-12 rounded-lg border border-gray-300 bg-gray-100 text-gray-900 text-sm shadow-sm">
+          <h5 className="text-center">Cout/page</h5>
+        </div>
+      </div>
 
-<input
-                  type="number"
-                 name="duree"
-                  placeholder="Durée de vie"
-                  value={newpiece.duree}
-                  onChange={handleInputChange}
-                 className="p-2 rounded-xl  mt-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  flex-1 mr-2 h-12"
-                 required
-/>
+      {/* Buttons */}
+      <div className="flex flex-col sm:flex-row gap-4 mt-6 justify-end">
+        <button
+          type="submit"
+          className="p-2 rounded-lg w-full sm:w-auto text-white bg-slate-800"
+        >
+          Enregistrer
+        </button>
+        <button
+          type="button"
+          onClick={() => setShowUpdateForm(false)}
+          className="rounded-lg p-2 w-full sm:w-auto text-slate-800 bg-amber-100"
+        >
+          Annuler
+        </button>
+      </div>
+    </form>
+  </>
+)}
 
-
-                  <div className="flex-1 rounded-xl  p-3 m-2 bg-white  border border-black shadow text-left">
-                      <h5 className="text-sm">Cout/page</h5>
-                  </div>
-                 
-              </div>
-          
-             {/* <div className="flex mt-10 justify-end">
-                        <button type="submit" className="p-2 text-white bg-teal-600 ">
-                            Enregistrer
-                        </button>
-                        <button type="button"  onClick={() => setShowUpdateForm(false)} className="ml-2 p-2 w-24 text-white bg-teal-600 ">
-                            Annuler
-                        </button>
-                 </div>*/}
-                      <div className="flex mt-10 justify-end">
-                      <button type="submit" className="p-2 link rounded-xl w-44  text-white bg-slate-800 ">
-                           Enregistrer
-                       </button>
-                       <button type="button" onClick={() => setShowUpdateForm(false)}  className="rounded-xl w-44 ml-2 p-2 link   text-white bg-amber-900 ">
-                           Annuler
-                       </button>
-                       </div>
-                 </form>
-               
-
-                    </>
-)}</>)}
+  </>)}
                     {showForm && (
                         <>
                    {!showUpdateForm && (
@@ -407,7 +408,7 @@ const  Pieces = () => {
 
     <button
          onClick={handleUpdateClick}
-        className="p-2 w-52 mb-2 rounded-xl link  bg-slate-800 text-white "
+        className="p-2 w-52 mb-2 rounded-lg link  bg-slate-800 text-white "
     >
        Mettre à jour les prix
     </button>
@@ -425,7 +426,8 @@ const  Pieces = () => {
            {showForm && (
                         <>
            {!showUpdateForm && (
-                    <table data-aos="fade-up"   className="min-w-full p-2 mb-4 shadow-lg">
+                  <div className="p-4 md:p-6 overflow-x-auto">
+<table className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
                     <thead>
   <tr>
     <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Référence</th>
@@ -465,8 +467,8 @@ const  Pieces = () => {
     </tr>
   ))}
 </tbody>
-
                    </table>
+                   </div>
             )}
             </>)}
         </div>

@@ -4,13 +4,25 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-body{
-  background-color: rgb(255, 255, 255);
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-style: normal;
+/* Désactiver le débordement pour tous les éléments */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
+/* Limiter le débordement au niveau global */
+html, body {
+  overflow-x: hidden; /* Empêche le scroll vertical */
+  height: 100%; /* S'assure que la hauteur soit fixe */
+  background-color: rgb(255, 255, 255); /* Couleur de fond */
+  font-family: "Roboto", sans-serif; /* Utilisation de la police Roboto */
+  font-weight: 100; /* Poids par défaut */
+  font-style: normal; /* Style par défaut */
+}
+
+/* Styliser la sélection du texte */
 ::selection {
-  background-color:  rgb(29, 43, 63); /* Texte en blanc */
-  color:rgb(249, 249, 236); /* Texte en blanc */
+  background-color: rgb(29, 43, 63); /* Couleur de fond lors de la sélection */
+  color: rgb(249, 249, 236); /* Couleur du texte lors de la sélection */
 }

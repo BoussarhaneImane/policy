@@ -1,26 +1,185 @@
+/* Base styling for .links */
 .links {
-  background-color: rgb(235, 237, 248);
-  border-radius: 0.9rem;
+  background-color: rgb(255, 255, 255);
+  border-radius: 2rem;
   padding: 0.8rem;
-  color: rgb(249, 249, 236);
-  width: 100px;
+  width: auto; /* Let the width adjust based on the content */
+  min-width: 100px; /* Ensure the minimum width is appropriate */
   height: 68px;
   text-decoration: none;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center; /* Vertically center the text */
+  justify-content: center; /* Horizontally center the text */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.links span {
+  font-size: 0.9rem; /* Adjust font size for readability */
 }
 
 .links:hover {
   transform: scale(1.1);
   box-shadow: 0 8px 16px rgba(56, 55, 55, 0.631);
-  background-color: rgb(249, 249, 236);
+  background-color: rgb(240, 240, 240);
 }
-.group{
+
+/* Styling for the navbar and menu */
+.navbar {
+  background-color: rgb(15, 23, 42);
+  padding: 1rem;
+  font-family: Arial, sans-serif;
   position: relative;
-  z-index: 10; /* Z-index plus haut pour que le menu soit devant la table */
 }
 
-.group:hover .group ul {
-  opacity: 1;
-  visibility: visible;
+.menu-toggle {
+  display: none; /* Initially hidden */
+  font-size: 24px;
+  color: rgb(25, 36, 64);
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
 }
 
+.menu {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap; /* Allow wrapping of menu items */
+}
+
+.menu.open {
+  display: block; /* Show when 'open' class is added */
+}
+
+.icon {
+  font-size: 3rem; /* Adjust the icon size */
+}
+
+/* Media query for responsive layout */
+@media (max-width: 768px) {
+  .links {
+   
+    font-size: 0.9rem; /* Adjusted font size for smaller screens */
+    padding: 0.5rem 1rem; /* Adjust padding for better spacing */
+    margin: 0.5rem 0; /* Minimal margin to prevent too much space */
+    white-space: normal; /* Allow text to wrap if necessary */
+  }
+
+
+
+ 
+  /* Default state of the menu should be hidden */
+  .menu {
+    position: relative;
+    z-index: 5; 
+    display: none;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    justify-items: center; /* Center align items */
+    align-items: center; /* Center align vertically */
+    gap: 10px; /* Spacing between items */
+    width: 100%;
+    background-color: rgb(20, 29, 50);
+    padding: 1rem 0;
+    
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+
+
+  .icon {
+    font-size: 1rem; /* Smaller icon size for mobile */
+  }
+
+  /* For individual links in the menu */
+  .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 0.8rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Style for the links */
+  .links:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(56, 64, 74, 0.2);
+  }
+  .menu-item {
+    position: relative; /* Empêcher le sous-menu de sortir de l'écran */
+    width: 100%;
+    left: 0; /* Assurez-vous que le sous-menu est aligné à gauche */
+    top: 0;
+    opacity: 1 !important; /* Le rendre visible par défaut */
+    margin-top: 1rem;
+    pointer-events: auto; /* Assurez-vous qu'il est interactif */
+  }
+
+}
+/* Media query for responsive layout on small screens and tablets */
+@media (max-width: 1024px) {
+  .links {
+    font-size: 0.9rem; /* Adjusted font size */
+    padding: 0.5rem 1rem; /* Adjust padding */
+    margin: 0.5rem 0; /* Minimal margin */
+    white-space: normal; /* Allow text to wrap */
+  }
+  .links ul {
+    z-index: 2; 
+  }
+  
+
+  /* Default state of the menu should be hidden */
+  .menu {
+    display: none;
+    grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background-color: rgb(20, 29, 50);
+    padding: 2rem 0;
+  }
+
+  /* When menu is open */
+  .menu.open {
+    display: flex;
+  }
+
+  /* Menu toggle button */
+  .menu-toggle {
+    display: block;
+  }
+
+  .icon {
+    font-size: 1rem; /* Smaller icon size */
+  }
+
+  /* For individual links in the menu */
+  .links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 0.8rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Hover effect for links */
+  .links:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(56, 64, 74, 0.2);
+  }
+}

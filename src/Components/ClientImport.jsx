@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './dashbord.css'
-function Categories() {
+function ClientImport() {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -23,10 +23,10 @@ function Categories() {
   };
 
   return (
-    <div className="flex items-center p-14">
-      <div className="bg-gray-100 p-8 shadow-lg rounded-xl " style={{width:'130rem'}}>
+    <div className="flex items-center  p-14">
+      <div className="bg-gray-100 p-8 shadow-lg  rounded-xl" style={{width:'130rem'}}>
         {/* Titre */}
-        <h1 className="text-xl font-medium mb-6 text-left text-blue-950">Importer catégories</h1>
+        <h1 className="text-xl font-medium mb-6 text-left text-blue-950">Importation des clients</h1>
         
         {/* Formulaire */}
         <form onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ function Categories() {
             <button 
               type="button" 
               onClick={handleCancel} 
-              className=" text-slate-800  bg-amber-100  py-2 px-4  rounded-xl link transition-all"
+              className=" text-slate-800  bg-amber-100 py-2 px-4 rounded-xl  link   transition-all"
             >
               Annuler
             </button>
@@ -66,4 +66,4 @@ function Categories() {
   );
 }
 
-export default Categories;
+export default ClientImport;

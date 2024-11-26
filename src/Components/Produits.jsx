@@ -55,7 +55,7 @@ function Produits() {
             <button 
               type="button" 
               onClick={handleCancel} 
-              className=" text-white py-2 px-4 rounded-xl link  bg-amber-900 transition-all"
+              className=" text-slate-800  bg-amber-100  py-2 px-4 rounded-xl link  transition-all"
             >
               Annuler
             </button>

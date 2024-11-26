@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  assetsInclude: ['**/*.png'], // Ajouter cette ligne pour inclure les fichiers PNG
+  server: {
+    port: 3002 // Modifiez ici le numéro de port souhaité
+  },
 });

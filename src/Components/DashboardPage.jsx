@@ -141,6 +141,7 @@ const DashboardPage = () => {
         setEditingSubcategoryIndex(null);
         setSelectedSubcategoryIndex(null); // Reset selected subcategory index
     };
+  
 
     // Handle selecting a subcategory
     const handleSelectSubcategory = (index) => {
@@ -156,7 +157,7 @@ const DashboardPage = () => {
         });
       }, []); 
     return (
-        <div className="min-h-screen mt-14 shadow-xl p-8 font-medium bg-gray-100 m-20 rounded-xl">
+        <div className="min-h-screen mt-14 shadow-xl m-10  sm:p-8 sm:pt-4  font-medium bg-gray-100  rounded-xl ">
             {/* Search and add product forms */}
             {selectedProductIndex === null ? (
                 <div >
@@ -165,7 +166,7 @@ const DashboardPage = () => {
                     <div className="flex justify-end mb-8 mt-8">
                         <button 
                             onClick={() => window.location.href = '/'} 
-                            className="p-2 w-32 bg-amber-900 rounded-xl text-white link " 
+                            className="p-2 m-4  sm:w-32 text-white bg-yellow-800 rounded-lg  link " 
                            
                         >
                             Retour 
@@ -173,50 +174,54 @@ const DashboardPage = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="flex mb-4">
                        
-                            <div className="flex-1 mr-2">
-                          
-                                <div className="flex">
+                       
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-4 bg-white  p-8 md:p-10 rounded-lg shadow-md  space-y-4 md:space-y-0 w-full">
+                        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-2 w-full">
                                     <input
                                         type="text"
                                         placeholder="Filtrer les produits"
                                         value={filter}
                                         onChange={handleFilterChange}
-                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow rounded-xl w-full"
+                                       className="border w-full md:w-72 border-gray-300 rounded-md p-2 "
                                     />
-                                    <button onClick={() => {}} className="link ml-2 p-2 w-44  text-white rounded-xl  bg-amber-900 ">
+                                    <button onClick={() => {}} className="link  text-slate-800  bg-amber-100 font-medium rounded-md px-4 py-2 w-full sm:w-auto link ">
                                         ReChercher
                                     </button>
-                                    <button onClick={() => setFilter('')} className="link ml-2 p-2  w-44  rounded-xl  text-white bg-slate-800 ">
+                                    <button onClick={() => setFilter('')}    className="bg-slate-800  text-amber-100 font-medium  rounded-md px-4 py-2 w-full sm:w-auto link">
                                         Annuler
                                     </button>
                                 </div>
-                            </div>
-                            <div className="flex-1 ml-2">
-                                <div className="flex">
+                        
+                            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-2 w-full">
                                     <input
                                         type="text"
                                         placeholder="Ajouter ou modifier un produit"
                                         value={newProduct}
                                         onChange={handleProductChange}
-                                        className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
+                                        className="border w-full md:w-72 border-gray-300 rounded-md p-2 "
                                     />
                                     <button 
                                         onClick={handleAddOrUpdateProduct} 
-                                        className={` link ml-2 p-2 w-44 rounded-xl  text-white bg-amber-900 ${editingProductIndex !== null ? 'w-40' : ''}`}
+                                        className={`   text-slate-800  bg-amber-100 font-medium rounded-md px-4 py-2 w-full sm:w-auto link  ${editingProductIndex !== null ? 'w-40' : ''}`}
                                     >
                                         {editingProductIndex !== null ? 'Mettre à jour' : 'Enregistrer'}
                                     </button>
-                                    <button onClick={handleCancelProduct} className=" link ml-2 w-44 p-2 text-white bg-slate-800 rounded-xl  ">
+                                    <button onClick={handleCancelProduct} className="bg-slate-800  text-amber-100 font-medium  rounded-md px-4 py-2 w-full sm:w-auto link">
                                         Annuler
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                       
 
+                      
                         {/* Products table */}
-                        <table  data-aos="fade-up" className="min-w-full bg-slate-800 border border-gray-300 mt-14   shadow-lg">
+                        <table
+                        
+                        
+  
+   className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg"
+>
                             <thead>
                                 <tr>
                                     <th className="border border-gray-300 p-2 text-gray-300 text-left">Produit</th>
@@ -255,8 +260,9 @@ const DashboardPage = () => {
                                     ))}
                             </tbody>
                         </table>
+                        </div>
                     </div>
-                </div>
+              
             ) : (
                 selectedSubcategoryIndex === null ? (
                 <div>
@@ -265,45 +271,44 @@ const DashboardPage = () => {
                     <div className="flex justify-between items-center mb-4">
                         {/*<h2 className="text-lg font-medium">Sous-catégories de {products[selectedProductIndex].name}</h2>*/}
                         <h2 className="text-xl font-bold text-blue-950"> Equipements</h2>
-                        <button onClick={handleBackToProducts} className="p-2 w-32 rounded-xl   text-white bg-amber-900 link ">
+                        <button onClick={handleBackToProducts} className="p-2 w-32 text-white bg-yellow-800 rounded-lg  link  ">
                             Retour 
                         </button>
                     </div>
                     
-                    <div className="flex mb-4">
-                        {/* Filtrage des sous-catégories */}
-                        <div className="flex-1 mr-2 mt-6 flex items-center">
+                    <div className="flex flex-col md:flex-row justify-between items-center  bg-white  p-8 md:p-10 rounded-lg shadow-md  space-y-4 md:space-y-0 w-full" style={{marginTop:'3rem'}}>
+                        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-2 w-full">
                             <input
                                 type="text"
                                 placeholder="Filtrer les sous-catégories"
                                 value={subcategoryFilter}
                                 onChange={handleSubcategoryFilterChange}
-                                className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
+                                className="border w-full md:w-72 border-gray-300 rounded-md p-2 "
                             />
-                            <button onClick={() => {}} className="ml-2 p-2 link  w-44 text-white bg-amber-900 rounded-xl ">
-                                ReChercher
-                            </button>
-                            <button onClick={() => setSubcategoryFilter('')} className="ml-2 p-2 link  w-44 text-white bg-slate-800 rounded-xl  ">
-                                Annuler
-                            </button>
+                          <button onClick={() => {}} className="link  text-slate-800  bg-amber-100 font-medium rounded-md px-4 py-2 w-full sm:w-auto link ">
+                                        ReChercher
+                                    </button>
+
+                                    <button onClick={() => setFilter('')}    className="bg-slate-800  text-amber-100 font-medium  rounded-md px-4 py-2 w-full sm:w-auto link">
+                                        Annuler
+                                    </button>
                         </div>
-            
-                        {/* Ajout de sous-catégories */}
-                        <div className="flex-1 ml-2 mt-6 flex items-center">
+
+                        <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-2 w-full">
                             <input
                                 type="text"
                                 placeholder="Ajouter une sous-catégorie"
                                 value={newSubcategory}
                                 onChange={handleSubcategoryChange}
-                                className="p-2 border border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-full rounded-xl "
+                                className="border w-full md:w-72 border-gray-300 rounded-md p-2 "
                             />
                             <button 
                                 onClick={handleAddSubcategory} 
-                                className={`ml-2 p-2 link  w-44 rounded-xl  text-white bg-amber-900  ${editingSubcategoryIndex !== null ? 'w-40' : ''}`}
+                                className={`text-slate-800  bg-amber-100 font-medium rounded-md px-4 py-2 w-full sm:w-auto link   ${editingSubcategoryIndex !== null ? 'w-40' : ''}`}
                             >
                                 {editingSubcategoryIndex !== null ? 'Mettre à jour' : 'Ajouter'}
                             </button>
-                            <button onClick={handleCancelSubcategory} className="link rounded-xl ml-2 p-2  w-44 text-white bg-slate-800 ">
+                            <button onClick={handleCancelSubcategory} className="bg-slate-800  text-amber-100 font-medium  rounded-md px-4 py-2 w-full sm:w-auto link ">
                                 Annuler
                             </button>
                         </div>
@@ -312,7 +317,7 @@ const DashboardPage = () => {
             
 
                     {/* Subcategories table */}
-                    <table  data-aos="fade-up" className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
+                    <table   className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
                         <thead>
                             <tr>
                                 <th className="border border-gray-300 p-2 text-gray-300 text-left">Sous-catégorie</th>
@@ -356,16 +361,13 @@ const DashboardPage = () => {
                   
                  <div className="flex justify-between items-center mt-8">
   
-     <h2 className="text-xl font-bold text-blue-950"> Equipements</h2>
+     <h2 className="text-xl font-bold text-blue-950 p-4  "> Equipements</h2>
 
-    <button
-        onClick={() => setSelectedSubcategoryIndex(null)}
-        className="p-2 w-32 rounded-xl link bg-amber-900 text-white "
-    >
-        Retour
-    </button>
+
 </div>
                 <EquipmentComponent
+                  
+                  setSelectedSubcategoryIndex={setSelectedSubcategoryIndex}
                     selectedSubcategoryIndex={selectedSubcategoryIndex}
                     subcategory={products[selectedProductIndex].subcategories[selectedSubcategoryIndex]} 
                     product={products[selectedProductIndex]} 

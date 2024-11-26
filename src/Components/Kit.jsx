@@ -124,6 +124,9 @@ const  Kit = () => {
    const handleConsommable = () =>{
         setShowForm(true);
    }
+   const handleBack = () => {
+    setShowForm(false)
+      };
    useEffect(() => {
     AOS.init({
       duration: 1000, // Durée de l'animation en millisecondes (par exemple, 1000ms = 1s)
@@ -132,7 +135,7 @@ const  Kit = () => {
     });
   }, []);  
     return (
-        <div className="mt-14 shadow-xl p-8 font-medium bg-gray-100 m-20 rounded-xl">
+        <div className="mt-14 shadow-xl  font-medium bg-gray-100 m-10  sm:p-8 sm:pt-4 rounded-xl">
              <div className="flex justify-between items-center mb-10 p-4 ">
             
              <Link to='/Consommables' className=' text-2xl  font-bold text-blue-950'>
@@ -141,8 +144,8 @@ const  Kit = () => {
              
     
  <button
-   onClick={handleGoBack}
-     className="p-2 w-32  rounded-xl link bg-amber-900 text-white "
+   onClick={handleBack}
+     className="p-2 m-4  sm:w-32  rounded-lg link text-white bg-yellow-800"
  >
      Retour
  </button>
@@ -168,37 +171,36 @@ const  Kit = () => {
 
 {!showForm &&(
     <>
-<div className="flex mb-4">
+<div className="flex flex-wrap md:flex-nowrap mb-4 bg-white p-6 rounded-lg shadow-md text-gray-700 items-center gap-4">
                         <input
                             type="text"
                             placeholder="Référence"
                             value={referenceFilter}
                             onChange={handleReferenceFilterChange}
-                            className="p-2 border  rounded-xl border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4"
+                     className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                         />
                         <input
                             type="text"
                             placeholder="Désignation"
                             value={designationFilter}
                             onChange={handleDesignationFilterChange}
-                            className="p-2 border  rounded-xl border-gray-900 text-gray-900 placeholder:text-gray-900 text-sm shadow  w-1/4 ml-2"
-                        />
-                         <button onClick={{}} className="ml-2 p-2 link  rounded-xl w-32 text-white bg-slate-800 ">
+                     className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"/>
+                         <button onClick={{}} className="ml-2 p-2 link  rounded-lg w-32 text-white bg-slate-800 ">
                           Rechercher
                         </button>
-                        <button onClick={handleCancelFilter} className="ml-2 p-2 link  rounded-xl w-32 text-white bg-amber-900 ">
+                        <button onClick={handleCancelFilter} className="ml-2 p-2 link  rounded-lg w-32 text-slate-800 bg-amber-100 ">
                             Annuler
                         </button>
                        
-                        <button onClick={handleConsommable} className="ml-auto link  rounded-xl w-52 p-2 text-white bg-slate-800 ">
+                        <button onClick={handleConsommable} className="ml-auto link  rounded-lg w-52 p-2 text-white bg-slate-800 ">
                         Ajouter Kit de nettoyage
                         </button>
                     </div>
 <h1 className='text-xl text-blue-950 font-bold mt-10 ml-4'>Liste des Kit de nettoyage</h1>
 
 
-
-<table  data-aos="fade-up"  className="min-w-full p-2 mt-8 shadow-lg">
+<div className="p-4 md:p-6 overflow-x-auto">
+<table className="min-w-full bg-slate-800 border border-gray-300 mt-14 shadow-lg">
                     <thead>
   <tr>
     <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Référence</th>
@@ -229,20 +231,21 @@ const  Kit = () => {
 </tbody>
 
                    </table>
+                   </div>
 
 </>
 )}
 {showForm && (
 <form onSubmit={handleSubmitOne} className="mb-4 p-4">
                    
-                   <div className="flex  mb-4 ">
+                   <div className="flex flex-wrap md:flex-nowrap mb-4 bg-white p-6 rounded-lg shadow-md text-gray-700 items-center gap-4">
                        <input
                            type="text"
                            name="reference"
                            placeholder="Référence"
                            value={newkit.reference}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border  rounded-xl border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -251,7 +254,7 @@ const  Kit = () => {
                            placeholder="Désignation"
                            value={newkit.designation}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border  rounded-xl border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -260,7 +263,7 @@ const  Kit = () => {
                            placeholder="Prix public"
                            value={newkit.price}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border  rounded-xl border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        <input
@@ -269,17 +272,17 @@ const  Kit = () => {
                            placeholder="Affectation"
                            value={newkit.affect}
                            onChange={handleInputChange}
-                           className="p-2 mt-2 border  rounded-xl border-gray-900 text-gray-900 text-sm shadow  flex-1 mr-2 h-12 placeholder:text-gray-950"
+                            className="p-2 w-full md:w-1/4 rounded-lg border border-gray-300 text-gray-900 placeholder-gray-500 text-sm shadow-sm h-12"
                            required
                        />
                        
                    </div>
                    {!showUpdateForm && (
                    <div className="flex mt-10 justify-end">
-                       <button type="submit" className="p-2  rounded-xl w-44 link text-white bg-slate-800 ">
+                       <button type="submit" className="p-2  rounded-lg w-44 link text-white bg-slate-800 ">
                            Enregistrer
                        </button>
-                       <button type="button" onClick={() => setShowForm(false)}  className=" rounded-xl w-44 ml-2 p-2 link  text-white bg-amber-900 ">
+                       <button type="button" onClick={() => setShowForm(false)}  className=" rounded-lg w-44 ml-2 p-2 link  text-slate-800 bg-amber-100 ">
                            Annuler
                        </button>
                 </div>)}
