@@ -55,7 +55,8 @@ function Devis() {
 
         {/* Main Table */}
         {!selectedRow && (
-          <table data-aos="fade-up" className="min-w-full p-2 mb-4 devis-container">
+      <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full border border-gray-300 mt-4 shadow-lg">
             <thead>
               <tr>
                 <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Raison Sociale</th>
@@ -93,6 +94,7 @@ function Devis() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
 
 {!showSecondRow && (
@@ -101,10 +103,10 @@ function Devis() {
         {selectedRow && (
 
           <div className="bg-white p-4 mt-4 rounded-lg shadow-lg">
-            <div className='flex justify-between m-11'>
+            <div className=' sm:flex   justify-between m-10'>
             <h3 className="text-2xl font-bold text-blue-950 ">Générer un devis </h3>
             <h3 className="text-xl  font-medium pl-10 text-slate-800">Configuration: {selectedRow.designation}</h3>
-            <select onChange={handleCompanySelect} className="border border-blue-900 font-medium text-slate-700 w-96 p-2 rounded  mb-4">
+            <select onChange={handleCompanySelect} className="border p-2 w-full rounded border-blue-900 mb-4">
               <option value="">Sélectionnez une entreprise</option>
               {companies.map((company, index) => (
                 <option key={index} value={company.name}>{company.name}</option>
@@ -131,7 +133,8 @@ function Devis() {
 
             {/* Detailed Tables for Vente Équipement et Consommables */}
             <h4 className="text-xl  mb-4 font-medium text-blue-950">Vente Équipement et Consommables</h4>
-            <table className="min-w-full mb-4 border">
+            <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full  border border-gray-300 mt-4 shadow-lg">
               <thead>
                 <tr>
                   <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Prestation</th>
@@ -160,10 +163,12 @@ function Devis() {
                
               </tbody>
             </table>
+            </div>
             <br></br>
              {/* Detailed Tables for Vente Équipement et Consommables */}
              <h4 className="text-xl  mb-4 font-medium text-blue-950">Contrat de service annuel</h4>
-            <table className="min-w-full mb-4 border">
+             <div className="p-4 md:p-6 overflow-x-auto">
+             <table className="min-w-full  border border-gray-300 mt-4 shadow-lg">
               <thead>
                 <tr>
                   <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Prestation</th>
@@ -191,6 +196,7 @@ function Devis() {
                
               </tbody>
             </table>
+            </div>
             {/* Button to return to the main table */}
             <button onClick={returnToMainTable} className="bg-cyan-900 shadow-lg text-white rounded p-2 mt-4">Liste devis</button>
             {selectedCompany && (
@@ -204,10 +210,10 @@ function Devis() {
         {showSecondRow && (
        
           <div className="bg-white p-4 mt-4 rounded shadow-lg">
-               <div className='flex justify-between m-11'>
-            <h3 className="text-2xl font-bold mb-2 text-blue-950">Générer un devis </h3>
+               <div className=' sm:flex   justify-between m-10'>
+            <h3 className="text-xl  font-bold mb-2 text-blue-950">Générer un devis </h3>
             <h3 className="text-xl font-medium text-slate-800 ">Configuration: {selectedRow.designation}</h3>
-            <select onChange={handleCompanySelect} className="border p-2 w-96  rounded border-blue-900 mb-4">
+            <select onChange={handleCompanySelect} className="border p-2 w-full rounded border-blue-900 mb-4">
               <option value="">Sélectionnez une entreprise</option>
               {companies.map((company, index) => (
                 <option key={index} value={company.name}>{company.name}</option>
@@ -234,7 +240,8 @@ function Devis() {
 
             {/* Monthly Rental and Sale of Consumables Table */}
             <h4 className="text-xl text-blue-950 font-medium mb-4">Loyer mensuel + vente de consommables</h4>
-            <table className="min-w-full mb-4 border">
+            <div className="p-4 md:p-6 overflow-x-auto">
+             <table className="min-w-full  border border-gray-300 mt-4 shadow-lg">
               <thead>
                 <tr>
                   <th className="px-4 py-2 border text-gray-300 bg-slate-800">Désignation</th>
@@ -253,7 +260,7 @@ function Devis() {
               
               </tbody>
             </table>
-
+</div>
             {/* Button to return to the main table */}
             <button onClick={returnToMainTable} className="bg-cyan-900 text-white rounded p-2 mt-8 shadow-lg">List devis</button>
             {selectedCompany && (

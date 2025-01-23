@@ -121,7 +121,7 @@ const [showEquipement,setshowEquipement]= useState(false);
       <hr className="my-6" />
 
       {/* Button to toggle the Service section */}
-      <div className="flex ">
+      <div className="flex flex-wrap gap-1 mt-4 sm:mt-8 md:mt-16 justify-center sm:justify-start">
       <button 
           onClick={handleShowEquipment} 
           className="mb-4 text-sm p-2 bg-cyan-900 shadow-xl text-white rounded-lg"

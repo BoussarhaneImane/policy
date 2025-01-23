@@ -20,8 +20,8 @@ function Attente() {
       <div className=' rounded-lg'>
         <h2 className="text-2xl text-blue-950 mb-4 font-medium">Devis en Attente</h2>
 
-        
-          <table data-aos="fade-up" className="min-w-full p-2 mb-4 devis-container">
+        <div className="p-4 md:p-6 overflow-x-auto">
+        <table className="min-w-full  border border-gray-300 mt-4 shadow-lg">
             <thead>
               <tr>
                 <th className="px-4 py-2 border border-gray-300 text-gray-300 bg-slate-800">Raison Sociale</th>
@@ -40,6 +40,7 @@ function Attente() {
               
             </tbody>
           </table>
+          </div>
       </div>
     </div>
   );

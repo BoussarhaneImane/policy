@@ -20,7 +20,12 @@ function Simulation() {
   const [showCalculerTable, setshowCalculerTable] = useState(false);
   const [selectedOption, setSelectedOption] = useState('option3');
   const [showHello, setShowHello] = useState(false);
+  const [selectedProduit, setSelectedProduit] = useState(null);
 
+  const handleProduitChange = (event) => {
+    setSelectedProduit(event.target.value);
+  };
+  
   const handleOptionChange = (event) => {
     setSelectedOption(event.target.value);
   };
@@ -93,6 +98,8 @@ function Simulation() {
     setShowConsomableTable(false)
     setShowOptionsTable(false)
     setShowEquipementTable(false);
+    setShowHello(false)
+   
   };
   const handleParametreClick2 = () => {
     setshowParametreTable2(!showParametreTable2)
@@ -115,6 +122,7 @@ function Simulation() {
 
   const handleCalulerClick = () => {
     // Réinitialise les états des tables avant d'appliquer les changements
+    
     setshowCalculerTable(false);
     setShowHello(false);
     setshowParametreTable3(false);
@@ -124,13 +132,19 @@ function Simulation() {
     setShowConsomableTable(false);
     setShowOptionsTable(false);
     setShowEquipementTable(false);
+ 
 
-    // Affiche les composants en fonction de l'option sélectionnée
-    if (selectedOption === 'option1' ) {
-      setshowCalculerTable(!showCalculerTable)
-        setshowCalculerTable(true);
-    } else if (selectedOption === 'option2'|| selectedOption === 'option3') {
-        setShowHello(true);
+    if (selectedOption === 'option1' && !showCalculerTable) {
+      // Afficher CalculerTable uniquement si ce n'est pas déjà actif
+      setshowCalculerTable(true);
+      setShowHello(false);
+    } else if (
+      (selectedOption === 'option2' || selectedOption === 'option3') &&
+      !showHello
+    ) {
+      // Afficher Hello uniquement si ce n'est pas déjà actif
+      setShowHello(true);
+      setshowCalculerTable(false);
     }
 };
 
@@ -214,6 +228,7 @@ function Simulation() {
           <div className="flex-1">
             <label htmlFor="produits" className="block text-lg font-medium text-blue-950">Produits</label>
             <select
+            onChange={handleProduitChange}
               id="produits"
               className="mt-2 block w-full p-3 border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-950 transition ease-in-out duration-300 rounded-xl"
             >
@@ -238,21 +253,34 @@ function Simulation() {
 
 
       {/* Conditionally render buttons only when all selects are displayed */}
-      {showSousCategorie1 && showSousCategorie2 && showSousCategorie3 && showProduits && (
-        <div className="flex gap-2 mt-16">
-          <button id="link" onClick={handleEquipementClick} className="bg-slate-800 text-white font-medium py-3 px-6 transition rounded-xl hover:bg-slate-700">Équipements</button>
-          <button id="link"  onClick={handleOptionsClick} className="bg-slate-800 text-white font-medium py-3 px-6 transition rounded-xl hover:bg-slate-700">Options</button>
-          <button id="link"  onClick={handleConsomableClick}  className="bg-slate-800 text-white font-medium py-3 px-6 transition rounded-xl hover:bg-slate-700">Consommables</button>
-          <button id="link"onClick={handleKitClick}  className="bg-slate-800 text-white font-medium py-3 px-6 transition rounded-xl hover:bg-slate-700">Kits de nettoyage</button>
-          <button id="link"  onClick={handleParametreClick}  className=" text-blue-950 font-medium py-3 px-6 transition rounded-xl bg-amber-50 hover:bg-gray-100">Paramètres de simulation</button>
-          <button id="link" onClick={handleCalulerClick} className="bg-amber-50 text-blue-950 font-medium py-3 px-6 transition rounded-xl hover:bg-gray-100">Calculer</button>
-        </div>
+      {showSousCategorie1 && showSousCategorie2 && showSousCategorie3 && showProduits &&  selectedProduit &&  (
+       <div className="flex flex-wrap gap-2 mt-4 sm:mt-8 md:mt-16 justify-center sm:justify-start">
+       <button id="link" onClick={handleEquipementClick} className="bg-slate-800 text-white font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl hover:bg-slate-700">
+         Équipements
+       </button>
+       <button id="link" onClick={handleOptionsClick} className="bg-slate-800 text-white font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl hover:bg-slate-700">
+         Options
+       </button>
+       <button id="link" onClick={handleConsomableClick} className="bg-slate-800 text-white font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl hover:bg-slate-700">
+         Consommables
+       </button>
+       <button id="link" onClick={handleKitClick} className="bg-slate-800 text-white font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl hover:bg-slate-700">
+         Kits de nettoyage
+       </button>
+       <button id="link" onClick={handleParametreClick} className="text-blue-950 font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl bg-amber-50 hover:bg-gray-100">
+         Paramètres de simulation
+       </button>
+       <button id="link" onClick={handleCalulerClick} className="bg-amber-50 text-blue-950 font-medium py-2 px-4 sm:py-3 sm:px-6 transition rounded-xl hover:bg-gray-100">
+         Calculer
+       </button>
+     </div>
+     
       )}
 {!showOptionsTable && (
   <>
       {showEquipementTable && (
-        <div className="mt-6">
-          <table  data-aos="fade-down" className="w-full table-auto border-collapse">
+        <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
             <thead>
               <tr className="bg-slate-800 text-gray-400  mb-2">
                 <th className="p-3 border font-medium">Référence</th>
@@ -308,8 +336,8 @@ function Simulation() {
        {!showEquipementTable && (
         <>
       {showOptionsTable && (
-        <div className="mt-6">
-         <table data-aos="fade-up" className="w-full table-auto border-collapse">
+             <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
             <thead>
               <tr className="bg-slate-800 text-gray-400 text-sm">
               <th className="p-3 border font-medium"></th>
@@ -377,8 +405,8 @@ function Simulation() {
         <>
       {showConsomableTable && (
            
-        <div className="mt-6">
-       <table data-aos="fade-up" className="w-full table-auto border-collapse">
+           <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
   <thead>
     <tr className="bg-slate-800 text-gray-400 text-sm">
       <th className="p-3 border font-medium whitespace-nowrap">Référence</th>
@@ -492,9 +520,8 @@ function Simulation() {
         {!showParametreTable3 &&(
         <>
         {showKitable && (
-           
-        <div className="mt-6">
-       <table data-aos="fade-up" className="w-full table-auto border-collapse">
+          <div className="p-4 md:p-6 overflow-x-auto">
+            <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
   <thead>
     <tr className="bg-slate-800 text-gray-400 text-sm">
       <th className="p-3 border font-medium whitespace-nowrap">Référence</th>
@@ -888,6 +915,7 @@ function Simulation() {
            {!showParametreTable2 && (
             <>
             {showParametreTable3 && (
+           
         <div className="mt-6">
  <form className="space-y-6">
   {/* Radio Buttons Section */}
@@ -1117,8 +1145,8 @@ function Simulation() {
 <div>
 <p className="text-left text-blue-950 text-2xl mt-10 mb-6 font-medium">Vente équipement</p>
   {/* Grid container for select elements */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-6">
-  <table data-aos="fade-up" className="w-full table-auto border-collapse  shadow">
+  <div className="p-4 md:p-6 overflow-x-auto">
+  <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
   <thead>
     <tr className="bg-slate-800 text-gray-400 text-sm">
       <th className="p-3 border font-medium whitespace-nowrap">Prestation</th>
@@ -1194,8 +1222,8 @@ function Simulation() {
 <div>
 <p className="text-left text-blue-950 text-2xl mt-10 mb-6 font-medium">Contrat de service annuel</p>
   {/* Grid container for select elements */}
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-6">
-  <table data-aos="fade-up" className="w-full table-auto border-collapse shadow">
+  <div className="p-4 md:p-6 overflow-x-auto">
+  <table className="min-w-full bg-slate-800 border border-gray-300 mt-4 shadow-lg">
   <thead>
     <tr className="bg-slate-800 text-gray-400 text-sm">
       <th className="p-3 border font-medium whitespace-nowrap">Prestation</th>
